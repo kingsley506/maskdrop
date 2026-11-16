@@ -1,0 +1,75 @@
+<!doctype html>
+<html lang="en" translate="no">
+<head>
+  <meta charset="UTF-8">
+  <meta name="google" content="notranslate">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self'; img-src 'self' data:; connect-src 'none'; object-src 'none'; base-uri 'none'; form-action 'none'">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f4f3ec">
+  <meta name="description" content="Review what leaves your clipboard. A local workspace to mask sensitive details in logs, configs, and support snippets before sharing.">
+  <meta property="og:title" content="MaskDrop — Review what leaves your clipboard.">
+  <meta property="og:description" content="Paste. Review. Share a cleaner snippet. A free, open-source workspace that runs in your browser.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://kingsley506.github.io/maskdrop/public/social.svg">
+  <title>MaskDrop — Review what leaves your clipboard.</title>
+  <link rel="icon" type="image/svg+xml" href="./public/icon.svg">
+  <link rel="stylesheet" href="./styles.css">
+  <script type="module" src="./src/app.js"></script>
+</head>
+<body>
+  <a class="skip-link" href="#source">Skip to workspace</a>
+  <div class="shell">
+    <header class="site-header">
+      <a class="brand" href="./" aria-label="MaskDrop home"><img src="./public/icon.svg" width="32" height="32" alt=""><span>maskdrop<span class="brand-dot">.</span></span><span class="version">v0.1</span></a>
+      <div class="header-right"><span class="local-badge"><span class="status-dot"></span> Runs on your device</span><a class="github-link" href="https://github.com/kingsley506/maskdrop" target="_blank" rel="noopener noreferrer">GitHub <span aria-hidden="true">↗</span></a></div>
+    </header>
+
+    <main>
+      <section class="intro" aria-labelledby="headline">
+        <div><p class="eyebrow">THE LAST STOP BEFORE YOU PASTE</p><h1 id="headline">Good context.<br><span>Fewer loose ends.</span></h1></div>
+        <div class="intro-copy"><p>Logs tell a story. Sometimes too much.<br> Review and mask sensitive details before you share them with AI, support, or the internet.</p><div class="principles"><span>No uploads</span><span>No account</span><span>Open source</span></div></div>
+      </section>
+
+      <section class="workspace" aria-label="Redaction workspace">
+        <div class="workspace-toolbar">
+          <div class="sample-controls"><span class="toolbar-label">Try a snippet</span><div class="segmented" role="group" aria-label="Demo snippets"><button data-sample="incident" aria-pressed="true">Debug log</button><button data-sample="env" aria-pressed="false">.env file</button><button data-sample="curl" aria-pressed="false">cURL</button></div></div>
+          <div class="input-actions"><input id="file-input" type="file" accept=".txt,.log,.json,.env,.yaml,.yml,.md,.csv,.sh" hidden><button class="text-button" id="open-file"><span aria-hidden="true">↥</span> Open file</button><button class="text-button muted" id="clear">Clear</button></div>
+        </div>
+
+        <div class="editor-grid">
+          <section class="editor-panel source-panel" id="drop-zone" aria-labelledby="source-heading">
+            <div class="panel-header"><h2 id="source-heading"><span class="step">01</span> Your original</h2><span id="source-meta">DEMO · FAKE DATA</span></div>
+            <label class="sr-only" for="source">Original text to review</label><textarea id="source" spellcheck="false" autocomplete="off" autocapitalize="off" placeholder="Paste a log, config, request, or support snippet…" aria-describedby="input-hint"></textarea>
+            <div class="panel-footer"><span id="input-hint">Paste text or drop a text file · max 1 MiB</span><span id="char-count">0 chars</span></div>
+          </section>
+
+          <section class="editor-panel output-panel" aria-labelledby="output-heading">
+            <div class="panel-header"><h2 id="output-heading"><span class="step">02</span> Sharing preview</h2><span class="preview-badge" id="preview-badge">REVIEW FIRST</span></div>
+            <pre id="output" tabindex="0" aria-label="Processed sharing preview"></pre>
+            <div class="panel-footer output-actions"><span id="output-summary" aria-live="polite">Ready to review</span><div class="copy-actions"><button class="text-button" id="copy-md" title="Copy processed text in a Markdown code block">Copy Markdown</button><button class="primary-button" id="copy"><span aria-hidden="true">⧉</span> Copy text</button></div></div>
+          </section>
+        </div>
+      </section>
+
+      <section class="review-grid" aria-label="Review and settings">
+        <div class="findings-panel">
+          <div class="section-heading"><div><p class="eyebrow">YOU MAKE THE FINAL CALL</p><h2>Review the details<span id="findings-count" class="count-pill">0</span></h2></div><button class="text-button" id="reset-review" hidden>Mask all again</button></div>
+          <div class="review-stats" aria-live="polite"><span><strong id="masked-count">0</strong> masked</span><span><strong id="kept-count">0</strong> kept</span><span><strong id="unique-count">0</strong> unique values</span><span class="same-value-note">Repeated matches stay linked</span></div>
+          <div id="findings" class="findings-list" aria-label="Detected details"></div>
+        </div>
+        <aside class="settings-panel" aria-label="Masking preferences">
+          <div class="settings-title"><h2>Make it yours</h2><span aria-hidden="true">✳</span></div>
+          <label class="toggle-row" for="personal"><span><strong>Personal details</strong><small>Emails, IPv4 addresses & home paths</small></span><input type="checkbox" id="personal" checked role="switch"></label>
+          <div class="custom-terms"><label for="terms">Your private words <span>optional</span></label><textarea id="terms" rows="2" spellcheck="false" placeholder="Internal domain, client, project name…"></textarea><small>One exact, case-sensitive phrase per line.</small></div>
+          <div class="download-row"><span>Take it with you</span><button class="text-button" id="download-txt">.txt ↓</button><button class="text-button" id="download-md">.md ↓</button></div>
+        </aside>
+      </section>
+
+      <div class="review-note"><span class="note-icon" aria-hidden="true">i</span><p>Pattern matching can miss sensitive details. Review the preview before sharing. Items you choose to keep stay in your export.</p></div>
+      <details class="how-it-works"><summary>What happens to my text?</summary><div><p>The text you enter is processed in this tab. MaskDrop has no upload endpoint, analytics, external fonts, or AI calls. It does not save your text to browser storage. Closing or reloading the tab clears your workspace.</p><p>Detected credentials and optional personal details receive numbered labels. Repeated values keep the same label so your snippet remains useful for debugging. Custom words are matched exactly, with case preserved. Detection is heuristic and incomplete; encrypted, encoded, split, or unfamiliar formats may be missed. Use a reviewed local copy for sensitive work.</p><p><a href="https://github.com/kingsley506/maskdrop#what-it-detects" target="_blank" rel="noopener noreferrer">Read the rules and limitations ↗</a></p></div></details>
+    </main>
+    <footer class="site-footer"><span>A little less oversharing. A little more peace of mind.</span><a href="https://github.com/kingsley506/maskdrop" target="_blank" rel="noopener noreferrer">Built in the open <span aria-hidden="true">↗</span></a></footer>
+  </div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</body>
+</html>

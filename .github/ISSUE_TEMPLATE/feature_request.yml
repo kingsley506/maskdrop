@@ -1,0 +1,26 @@
+name: Feature request
+description: Suggest a focused improvement to the sharing workflow.
+title: "[Feature]: "
+body:
+  - type: markdown
+    attributes:
+      value: Please describe the workflow with fictional data. Do not share real secrets or private material.
+  - type: textarea
+    id: problem
+    attributes:
+      label: What are you trying to do?
+      description: Describe the concrete task and where the current workflow gets in the way.
+    validations:
+      required: true
+  - type: textarea
+    id: suggestion
+    attributes:
+      label: Suggested behavior
+      description: What would improve that task? Include a fictional example if useful.
+    validations:
+      required: true
+  - type: textarea
+    id: alternatives
+    attributes:
+      label: Alternatives or tradeoffs
+      description: Optional. Consider local processing, reviewability, and false positives.

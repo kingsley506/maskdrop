@@ -1,0 +1,50 @@
+name: Bug report
+description: Report a missed fictional pattern, false positive, or application problem.
+title: "[Bug]: "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please use entirely fictional examples. Never submit real credentials, private logs, customer data, or screenshots containing them.
+        For vulnerabilities in the application itself, follow SECURITY.md.
+  - type: checkboxes
+    id: fictional-data
+    attributes:
+      label: Data check
+      options:
+        - label: This report and any attachments contain only fictional or public example data.
+          required: true
+  - type: dropdown
+    id: surface
+    attributes:
+      label: Where did it happen?
+      options:
+        - Browser playground
+        - Node CLI
+        - Documentation
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Steps to reproduce
+      description: Include a minimal fictional input and any settings or CLI flags used.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected result
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual result
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: Environment
+      description: Browser/Node version, operating system, and MaskDrop version or commit.
