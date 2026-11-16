@@ -8,7 +8,7 @@ Clean up logs, configs, and support snippets before sharing them with an AI assi
 
 **Local processing · No account · No AI service · Zero dependencies**
 
-[Open the playground](https://kingsley506.github.io/maskdrop/) · [中文说明](README.zh-CN.md) · [Report a bug](https://github.com/kingsley506/maskdrop/issues/new?template=bug_report.yml)
+[Open the playground](https://kingsley506.github.io/maskdrop/) · [Download the offline app](https://github.com/kingsley506/maskdrop/releases/latest/download/maskdrop.html) · [中文说明](README.zh-CN.md) · [Report a bug](https://github.com/kingsley506/maskdrop/issues/new?template=bug_report.yml)
 
 ![MaskDrop playground showing a sample log, detected findings, and the share preview](docs/demo.jpg)
 
@@ -56,11 +56,15 @@ Supported file imports: `.txt`, `.log`, `.json`, `.env`, `.yaml`, `.yml`, `.md`,
 | Optional personal details | Email-shaped strings, valid IPv4-shaped addresses, and usernames in common macOS, Linux, and Windows home-directory paths. |
 | Custom private terms | Exact, case-sensitive text you supply. Add terms explicitly when context matters. |
 
-The rules do not cover every provider, syntax, credential, or type of personal data. They do not decode values, identify arbitrary names or phone numbers, or understand business context. Incomplete blocks, unusual escaping, split values, and unfamiliar formats may be missed. Review the entire output and add private terms where needed.
+The rules do not cover every provider, syntax, credential, or type of personal data. They do not decode values, identify arbitrary names or phone numbers, or understand business context. YAML block scalars, IPv6 addresses, encoded secrets, incomplete blocks, unusual escaping, split values, and unfamiliar formats may be missed. Format preservation is best effort; this is not a complete parser. Review the entire output and add private terms where needed.
 
 ## Run locally
 
-Requires Node.js 22 or newer. No package installation or build step is needed.
+**No Node required:** [download `maskdrop.html`](https://github.com/kingsley506/maskdrop/releases/latest/download/maskdrop.html), save it, and double-click to open the standalone app in your browser. It includes the same detection engine and works offline after downloading. On `file://`, browser clipboard permissions may require selecting the preview and pressing Ctrl/Cmd+C manually; text and Markdown downloads remain available.
+
+Whether you use a hosted page or a single HTML file, trust and review the code before entering sensitive material. Running locally does not guarantee that every sensitive value is detected.
+
+For development or serving a source checkout, use Node.js 22 or newer. No package installation or build step is needed to run the source app.
 
 ```sh
 git clone https://github.com/kingsley506/maskdrop.git
@@ -70,7 +74,13 @@ node scripts/serve.js
 
 Open [http://localhost:4173](http://localhost:4173).
 
-For sensitive material, prefer a local copy whose source you have reviewed. A hosted page must be trusted with anything you paste into it, even when its intended processing is local.
+To build the standalone file from a checkout:
+
+```sh
+node scripts/build-standalone.js
+```
+
+The result is `dist/maskdrop.html`.
 
 ## CLI
 

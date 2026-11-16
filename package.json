@@ -8,6 +8,7 @@
   "engines": { "node": ">=22" },
   "scripts": {
     "start": "node scripts/serve.js",
+    "build": "node scripts/build-standalone.js",
     "test": "node --test",
     "check": "node --check src/redact.js && node --check src/app.js && node --check bin/maskdrop.js && node --check scripts/serve.js"
   },

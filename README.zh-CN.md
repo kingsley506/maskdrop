@@ -6,7 +6,7 @@
 
 **本地处理 · 无需账号 · 无 AI 服务 · 零依赖**
 
-[在线体验](https://kingsley506.github.io/maskdrop/) · [English](README.md) · [提交问题](https://github.com/kingsley506/maskdrop/issues/new?template=bug_report.yml)
+[在线体验](https://kingsley506.github.io/maskdrop/) · [下载离线版](https://github.com/kingsley506/maskdrop/releases/latest/download/maskdrop.html) · [English](README.md) · [提交问题](https://github.com/kingsley506/maskdrop/issues/new?template=bug_report.yml)
 
 ![MaskDrop：示例日志、检测结果与分享预览](docs/demo.jpg)
 
@@ -45,11 +45,15 @@
 | 可选个人信息 | 邮箱形状的文本、符合 IPv4 格式的地址、常见 macOS / Linux / Windows 主目录路径中的用户名。 |
 | 自定义私密词 | 用户填写的精确文本，区分大小写。需要上下文的信息请主动添加。 |
 
-规则没有覆盖所有平台、语法、凭据或个人信息类型，不会解码数据、识别任意人名和电话号码，也不理解业务上下文。不完整的块、特殊转义、拆开的值及未知格式可能漏检。请检查完整输出，并按需补充私密词。
+规则没有覆盖所有平台、语法、凭据或个人信息类型，不会解码数据、识别任意人名和电话号码，也不理解业务上下文。YAML 块标量、IPv6 地址、编码后的密钥、不完整的块、特殊转义、拆开的值及未知格式可能漏检。格式保留只做尽力处理，这不是完整的格式解析器。请检查完整输出，并按需补充私密词。
 
 ## 本地运行
 
-需要 Node.js 22 或更高版本，无需安装依赖或构建。
+**不需要 Node：**[下载 `maskdrop.html`](https://github.com/kingsley506/maskdrop/releases/latest/download/maskdrop.html)，保存后双击，用浏览器打开单文件应用。它使用相同的检测核心，下载后可离线使用。在 `file://` 下，浏览器的剪贴板权限可能要求手动选中预览并按 Ctrl/Cmd+C；纯文本和 Markdown 下载仍可使用。
+
+无论使用托管网页还是单个 HTML 文件，输入敏感材料前都需要信任并审阅代码。本地运行不能保证检测出所有敏感值。
+
+开发或从源码启动本地服务时，需要 Node.js 22 或更高版本；运行源码应用无需安装依赖或构建。
 
 ```sh
 git clone https://github.com/kingsley506/maskdrop.git
@@ -59,7 +63,13 @@ node scripts/serve.js
 
 打开 [http://localhost:4173](http://localhost:4173)。
 
-处理敏感材料时，建议使用自己检查过源码的本地副本。即使网页设计为本地处理，你仍然需要信任它执行的代码。
+从源码生成单文件离线版：
+
+```sh
+node scripts/build-standalone.js
+```
+
+生成文件位于 `dist/maskdrop.html`。
 
 ## 命令行
 

@@ -5,6 +5,7 @@
 First public release.
 
 - Local browser workspace with source text, findings, and a share preview.
+- Downloadable standalone HTML app that uses the same engine and opens offline without Node.js.
 - Common secret and personal-data detection with consistent placeholders.
 - Per-occurrence keep/mask choices and custom private terms.
 - Fictional samples and local text-file import, including drag and drop.

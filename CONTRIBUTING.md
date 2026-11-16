@@ -4,7 +4,7 @@ Thanks for helping make sharing snippets easier to review.
 
 ## Start locally
 
-Use Node.js 22 or newer. The project has no dependencies or build step.
+Use Node.js 22 or newer. The project has no dependencies, and serving the source app requires no build step.
 
 ```sh
 node --test
@@ -12,6 +12,8 @@ node scripts/serve.js
 ```
 
 Open `http://localhost:4173` to check browser changes.
+
+To generate the optional standalone app, run `node scripts/build-standalone.js` and open `dist/maskdrop.html`. Check both the source app and standalone app when changing browser code.
 
 ## Useful contributions
 

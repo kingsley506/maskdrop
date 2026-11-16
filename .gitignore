@@ -9,3 +9,4 @@ test-results/
 *.log
 share.txt
 _site/
+dist/
